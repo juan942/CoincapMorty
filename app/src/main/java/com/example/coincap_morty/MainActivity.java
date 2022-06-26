@@ -12,6 +12,8 @@ import com.example.coincap_morty.client.RickAndMortyClient;
 import com.example.coincap_morty.databinding.ActivityMainBinding;
 import com.example.coincap_morty.entity.Message;
 import com.example.coincap_morty.entity.coin_cap.CoinCap;
+import com.example.coincap_morty.entity.rick_and_morty.Character;
+import com.example.coincap_morty.entity.rick_and_morty.Episode;
 import com.example.coincap_morty.service.CoincapApiService;
 import com.example.coincap_morty.service.RetrofitApiService;
 import com.example.coincap_morty.service.RickAndMortyApiService;
@@ -51,6 +53,7 @@ public class MainActivity extends Activity {
         // getRandomCoin();
         // ---- Metodo de RickAndMorty
         getRandomCharacter();
+        //getRandomEpisode();
         // ---- Metodos de ejemplo
         //getMessage(50);
         // getMessages(2);
@@ -102,17 +105,35 @@ public class MainActivity extends Activity {
 
     // ---- Metodo para consumir Api de RickAndMorty
     private void getRandomCharacter() {
-        rickAndMortyService.getCharacterById(2).enqueue(new Callback<Character>() {
+        Random rand = new Random();
+        int id = rand.nextInt(826);
+        rickAndMortyService.getCharacterById(id).enqueue(new Callback<Character>() {
             @Override
             public void onResponse(Call<Character> call, Response<Character> response) {
-                Character character = response.body();
-                mTextView.setText(character.toString());
+                Character chart = response.body();
+                mTextView.setText(chart.toString());
             }
 
             @Override
             public void onFailure(Call<Character> call, Throwable t) {
-                mTextView.setText(t.toString());
-                System.out.println(t);
+                mTextView.setText(t.getMessage());
+            }
+        });
+    }
+
+    private void getRandomEpisode() {
+        Random rand = new Random();
+        int id = rand.nextInt(51);
+        rickAndMortyService.getEpisodeById(id).enqueue(new Callback<Episode>() {
+            @Override
+            public void onResponse(Call<Episode> call, Response<Episode> response) {
+                Episode episode = response.body();
+                mTextView.setText(episode.toString());
+            }
+
+            @Override
+            public void onFailure(Call<Episode> call, Throwable t) {
+                mTextView.setText(t.getMessage());
             }
         });
     }

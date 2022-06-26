@@ -1,6 +1,6 @@
 package com.example.coincap_morty.entity.rick_and_morty;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class Character {
     private int id;	                // El id del personaje.
@@ -28,7 +28,7 @@ public class Character {
                 ", origin=" + origin.toString() +
                 ", location=" + location.toString() +
                 ", image='" + image + '\'' +
-                ", episode=" + episode +
+                ", episode=" + Arrays.toString(episode) +
                 ", url='" + url + '\'' +
                 ", created='" + created + '\'' +
                 '}';
